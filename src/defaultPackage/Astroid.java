@@ -1,0 +1,65 @@
+package defaultPackage;
+
+import org.newdawn.slick.Image;
+import org.newdawn.slick.SlickException;
+import org.newdawn.slick.geom.*;
+
+/**
+ *
+ * @author cars0520
+ */
+public class Astroid {
+
+    private Image image;
+    private Rectangle hitbox;
+    private int xdir, ydir;
+    private boolean isChosen;
+
+    private static int GAME_WIDTH;
+    private static int GAME_HEIGHT;
+
+    public Astroid(int x, int y) throws SlickException {
+        image = new Image("images/astroid.png");
+        hitbox = new Rectangle(x, y, image.getWidth(), image.getHeight());
+        isChosen = false;
+
+        //randomly assign from -3 to +3 with 0 not allowed
+        while (true) {
+            xdir = (int) (Math.random() * 7 - 3); //-3, -2, -1, 0, 1, 2, 3
+            ydir = (int) (Math.random() * 7 - 3);
+            if (xdir != 0 && ydir != 0) {
+                break;
+            }
+        }
+    }
+
+    public static void setGameSize(int x, int y) {
+        GAME_WIDTH = x;
+        GAME_HEIGHT = y;
+    }
+
+    public boolean hit(int x, int y) {
+        if (hitbox.contains(x, y)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public void move() {
+        hitbox.setX(hitbox.getX() + xdir);
+        hitbox.setY(hitbox.getY() + ydir);
+
+        //bounce when we hit a side
+        if (hitbox.getX() <= 0 || hitbox.getX() > GAME_WIDTH) {
+            xdir = -xdir;
+        }
+        if (hitbox.getY() <= 0 || hitbox.getY() > GAME_HEIGHT) {
+            ydir = -ydir;
+        }
+    }
+
+    public void draw() {
+        image.draw(hitbox.getX(), hitbox.getY());
+    }
+}
