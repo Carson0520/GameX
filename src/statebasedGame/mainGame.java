@@ -1,21 +1,26 @@
-package defaultPackage;
+package statebasedGame;
 
+import defaultPackage.Astroid;
 import java.util.ArrayList;
-import org.newdawn.slick.*;
+import org.newdawn.slick.Color;
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Input;
+import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Rectangle;
+import org.newdawn.slick.geom.*;
+import org.newdawn.slick.state.*;
+import org.newdawn.slick.state.BasicGameState;
+import org.newdawn.slick.state.StateBasedGame;
+import org.newdawn.slick.state.transition.FadeInTransition;
+import org.newdawn.slick.state.transition.FadeOutTransition;
 
-public class RockBlast extends BasicGame {
-
+public class mainGame extends BasicGameState {
     ArrayList<Astroid> rocks;
     int timer;
     int timer2;
     Color darkGreen;
-
-    public RockBlast(String title) {
-        super(title);
-    }
-
-    public void init(GameContainer gc) throws SlickException {
+    public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
         rocks = new ArrayList();
         timer = 0;
         timer2 = 0;
@@ -26,12 +31,10 @@ public class RockBlast extends BasicGame {
             int ry = (int) (Math.random() * 550);
             rocks.add(new Astroid(rx, ry));
         }
-        rocks.get(0).setChosen();
-        darkGreen = new Color(53, 74, 39);
     }
+    
 
-    public void update(GameContainer gc, int i) throws SlickException {
-
+    public void update(GameContainer gc, StateBasedGame sbg, int i) throws SlickException {
         Input in = gc.getInput();
         int mx = gc.getInput().getMouseX();
         int my = gc.getInput().getMouseY();
@@ -60,10 +63,13 @@ public class RockBlast extends BasicGame {
                 int ry = (int) (Math.random() * 500 + 45);
                 rocks.add(new Astroid(rx, ry));
             }
+            else {
+            sbg.enterState(2, new FadeOutTransition(), new FadeInTransition());
+        }
         }
     }
 
-    public void render(GameContainer gc, Graphics g) throws SlickException {
+    public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
         g.setColor(darkGreen);
         g.fill(new Rectangle(0,0,800,40));
         g.setColor(Color.red);
@@ -78,13 +84,8 @@ public class RockBlast extends BasicGame {
         g.drawString("Rocks Remaining: " + rocks.size(),620,10);
     }
 
-    public static void main(String args[]) throws SlickException {
-        RockBlast game = new RockBlast("Testing Game");
-        AppGameContainer app = new AppGameContainer(game);
-        app.setDisplayMode(800, 600, false);
-        app.setShowFPS(false);
-        app.setTargetFrameRate(100);
-        app.start();
+    public int getID() {
+        return 1;  //this id will be different for each screen
     }
 
 }
