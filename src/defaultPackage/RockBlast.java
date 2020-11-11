@@ -65,7 +65,7 @@ public class RockBlast extends BasicGame {
 
     public void render(GameContainer gc, Graphics g) throws SlickException {
         g.setColor(darkGreen);
-        g.fill(new Rectangle(0,0,800,40));
+        g.fill(new Rectangle(0, 0, 800, 40));
         g.setColor(Color.red);
         for (Astroid a : rocks) {
             if (a.isChosen()) {
@@ -75,7 +75,7 @@ public class RockBlast extends BasicGame {
         }
         g.setColor(Color.yellow);
         g.drawString("Time: " + (double) timer2 / 100, 10, 10);
-        g.drawString("Rocks Remaining: " + rocks.size(),620,10);
+        g.drawString("Rocks Remaining: " + rocks.size(), 620, 10);
     }
 
     public static void main(String args[]) throws SlickException {
