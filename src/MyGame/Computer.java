@@ -12,7 +12,7 @@ import org.lwjgl.input.Mouse;
  *
  * @author cars0520
  */
-public class NewMain extends BasicGame {
+public class Computer extends BasicGame {
 
     ArrayList<Asteroids> rocks;
     int counter;
@@ -23,7 +23,7 @@ public class NewMain extends BasicGame {
     String str = "ALL 30! GOOD JOB!";
     public Rectangle reticlehb;
 
-    public NewMain(String title) {
+    public Computer(String title) {
         super(title);
     }
 
@@ -85,9 +85,9 @@ public class NewMain extends BasicGame {
                 int ry = (int) (Math.random() * 500 + 45);
                 rocks.add(new Asteroids(830, ry));
             }*/
-            int q = (int) (Math.random() * 10 + 1);
+            int q = (int) (Math.random() * 80 + 1);
             int ry = (int) (Math.random() * 500 + 45);
-            if (q == 3) {
+            if (q == 60) {
                 rocks.add(new Asteroids(830, ry));
             }
         }
@@ -108,7 +108,7 @@ public class NewMain extends BasicGame {
     @Override
 
     public void render(GameContainer gc, Graphics g) throws SlickException {
-        //   gc.setFullscreen(true);
+      //  gc.setFullscreen(true);
         bg.draw();
         g.setColor(Color.red);
         reticle.draw(cx - 50, cy - 50);
@@ -126,7 +126,7 @@ public class NewMain extends BasicGame {
         }*/
         g.setColor(Color.yellow);
         g.drawString("Time: " + (double) timer2 / 100, 10, 10);
-        g.drawString("Rocks Remaining: " + rocks.size(), 620, 10);
+      //  g.drawString("Rocks Remaining: " + rocks.size(), 620, 10);
         g.drawString("Score: " + counter, 400, 10);
         if (counter >= 30) {
             g.setColor(Color.red);
@@ -140,7 +140,7 @@ public class NewMain extends BasicGame {
     }
 
     public static void main(String args[]) throws SlickException {
-        NewMain game = new NewMain("Testing Game");
+        Computer game = new Computer("Testing Game");
         AppGameContainer app = new AppGameContainer(game);
         app.setDisplayMode(800, 600, false);
         app.setShowFPS(false);
