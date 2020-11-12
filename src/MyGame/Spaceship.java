@@ -12,7 +12,7 @@ public class Spaceship extends BasicGame {
     int cx = 100, cy = 350;
     int GAME_WIDTH, GAME_HEIGHT;
     Rectangle tp, rt, bt, lt;
-    Rectangle hitBox, computer, brainbox;
+    Rectangle hitBox, computer, brainbox,electrical;
 
     public Spaceship(String title) {
         super(title);
@@ -44,7 +44,7 @@ public class Spaceship extends BasicGame {
         if (in.isKeyDown(Input.KEY_A)) {
             cx -= 3;
             if (hitBox.intersects(lt)) {
-                cx += 3;
+                cx += 3;               
             }
         }
         if (in.isKeyDown(Input.KEY_S)) {
@@ -59,22 +59,18 @@ public class Spaceship extends BasicGame {
                 cx -= 3;
             }
         }
-        if (in.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
+           if (in.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
             //   System.out.println("x,"+cx+" y,"+cy);
             System.out.println("x, " + gc.getInput().getMouseX() + " y, " + gc.getInput().getMouseY());
         }
-        /*
-        s1.setX(cx);
-        s1.setY(cy);
-        if (cy >= 250) {
-            cy += 0;
+
+        if (computer.contains(mx, my) && computer.intersects(brainbox) && in.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
+            //change game state //working
         }
-         */
-        if (computer.intersects(brainbox) && in.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
-            if (brainbox.getX()==gc.getInput().getMouseX() && brainbox.getY()==gc.getInput().getMouseY())
-            //change game state to game
-            System.out.println("working");
-        }
+        ///////////////////////////////////////////////////////////////////////////
+/*        if (electrical.contains(mx, my) && electrical.intersects(brainbox) && in.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
+            //change game state //working
+        }*/
     }
 
     public void render(GameContainer gc, Graphics g) throws SlickException {
