@@ -1,4 +1,4 @@
-package MyGame;
+package MyGameTests;
 
 import org.newdawn.slick.*;
 import org.newdawn.slick.geom.Circle;

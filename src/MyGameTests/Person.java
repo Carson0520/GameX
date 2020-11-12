@@ -1,4 +1,4 @@
-package MyGame;
+package MyGameTests;
 
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;

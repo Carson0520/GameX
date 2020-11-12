@@ -1,6 +1,6 @@
 package FINALE;
 
-import MyGame.wire;
+import MyGameTests.wire;
 import java.util.ArrayList;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;

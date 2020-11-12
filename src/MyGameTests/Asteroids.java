@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package MyGame;
+package MyGameTests;
 
 import org.newdawn.slick.*;
 import org.newdawn.slick.geom.*;
@@ -15,7 +15,8 @@ import org.newdawn.slick.geom.*;
 public class Asteroids {
 
     private Image img;
-    private Rectangle hitbox;
+    
+    Rectangle hitbox;
     private int Xdir, Ydir;
 
     private static int GAME_WIDTH, GAME_HEIGHT;
