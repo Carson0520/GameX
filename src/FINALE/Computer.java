@@ -18,6 +18,7 @@ import org.newdawn.slick.state.transition.FadeOutTransition;
 
 public class Computer extends BasicGameState {
 
+    Wires w = new Wires();
     ArrayList<Asteroids> rocks;
     int counter;
     int timer, timer2;
@@ -25,8 +26,9 @@ public class Computer extends BasicGameState {
     int cx, cy;
     Shape s1, s2;
     String str = "ALL 30! GOOD JOB!";
+    String task = "GO TO THE ELECTRICAL BOX!";
     public Rectangle reticlehb;
-    boolean allgood=false;
+    boolean allgood = false;
 
     public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
         bg = new Image("images/weaponsbg.png");
@@ -79,24 +81,32 @@ public class Computer extends BasicGameState {
             }
         }
         if (counter >= 30) {
-            if (s1.contains(mx, my) && in.isMousePressed(Input.MOUSE_LEFT_BUTTON)) //change screen to walking guy
+            if (w.allgood == true && allgood == true&& s1.contains(mx, my) && in.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
+                System.out.println("nice?");
+                sbg.enterState(3, new FadeOutTransition(), new FadeInTransition());
+            }
+            else if (s1.contains(mx, my) && in.isMousePressed(Input.MOUSE_LEFT_BUTTON)) //change screen to walking guy
             {
                 System.out.println("compgood");
-                allgood=true;
-                sbg.enterState(1,new FadeOutTransition(), new FadeInTransition());
-                
-               // System.out.println("WOKRING");
+                allgood = true;
+                sbg.enterState(1, new FadeOutTransition(), new FadeInTransition());
+                             MainGame.setGameSize(1600, 600);
+
+                // System.out.println("WOKRING");
                 //get  rid of rocks remaining
                 //set boundry
                 //time not neccessary
             }
             return;
         }
+        if (s1.contains(mx, my) && in.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
+           
+        }
     }
 
     public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
         //  gc.setFullscreen(true);
-                
+
         bg.draw();
         g.setColor(Color.red);
         reticle.draw(cx - 50, cy - 50);
@@ -106,7 +116,7 @@ public class Computer extends BasicGameState {
 
                 a.draw();
                 reticle.draw(cx - 50, cy - 50);
-                g.draw(s2);
+       //         g.draw(s2);
             }
         }/* else if (counter != 30) {
             g.drawString(str, 485, 10);
@@ -119,6 +129,7 @@ public class Computer extends BasicGameState {
             g.setColor(Color.red);
             g.fill(new Rectangle(0, 0, 800, 40));
             g.setColor(Color.yellow);
+            g.drawString(task,250,250);
             g.drawString(str, 485, 10);
             g.fill(s1);
             g.setColor(Color.red);

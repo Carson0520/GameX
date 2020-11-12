@@ -29,7 +29,6 @@ public class Wires extends BasicGameState {
     /*yellow*/ Rectangle ystartbox, yextend, yendbox;
     /*white*/ Rectangle wstartbox, wextend, wendbox;
     boolean keepr, keepb, keepy, keepw, allgood = false;
-
     public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
         wires = new ArrayList();
         bg = new Image("images/wires.png");
@@ -80,7 +79,7 @@ public class Wires extends BasicGameState {
             System.out.println("wiregood");
             if (s4.contains(mx, my) && in.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
                 //  System.out.println("work");
-                sbg.enterState(1,new FadeOutTransition(), new FadeInTransition());
+                sbg.enterState(4,new FadeOutTransition(), new FadeInTransition());
             }
         }
     }

@@ -19,7 +19,7 @@ public class Ship extends BasicGameState {
 
     Wires w = new Wires();
     Computer c = new Computer();
-boolean allgood =false;
+    boolean allgood = false;
     Image bg, character;
     Shape s1;
     int cx = 100, cy = 350;
@@ -38,6 +38,7 @@ boolean allgood =false;
 
         w.allgood = false;
         c.allgood = false;
+
     }
 
     public void update(GameContainer gc, StateBasedGame sbg, int i) throws SlickException {
@@ -81,24 +82,31 @@ boolean allgood =false;
 
         if (computer.contains(mx, my) && computer.intersects(brainbox) && in.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
             //change game state //working
+            Graphics g = new Graphics();
             sbg.enterState(2, new FadeOutTransition(), new FadeInTransition());
+            MainGame.setGameSize(800, 600);
+
         }
         if (electrical.contains(mx, my) && electrical.intersects(brainbox) && in.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
             //change game state 
+            Graphics g = new Graphics();
             sbg.enterState(3, new FadeOutTransition(), new FadeInTransition());
+            MainGame.setGameSize(800, 600);
+
         }
         if (w.allgood == true && c.allgood == true) {
-            allgood=true;
-          
-            if (s1.contains(gc.getInput().getMouseX(), gc.getInput().getMouseY()) && in.isMousePressed(Input.MOUSE_LEFT_BUTTON)) //change screen to walking guy
+            allgood = true;
+
+            /*      if (s1.contains(gc.getInput().getMouseX(), gc.getInput().getMouseY()) && in.isMousePressed(Input.MOUSE_LEFT_BUTTON)) //change screen to walking guy
             {
                 System.out.println("workign");
-            }
+            }*/
         }
     }
 
     public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
         Input in = gc.getInput();
+
         bg.draw();
         g.setColor(Color.yellow);
         g.setColor(Color.red);
@@ -115,11 +123,22 @@ boolean allgood =false;
         //    g.fill(brainbox);
         //border
         g.setColor(Color.black);
-        g.fill(tp);
+        // g.fill(tp);
         g.fill(bt);
         g.fill(rt);
         g.fill(lt);
         drawfinal(g);
+        if (computer.contains(gc.getInput().getMouseX(), gc.getInput().getMouseY()) && computer.intersects(brainbox) && in.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
+
+            sbg.enterState(2, new FadeOutTransition(), new FadeInTransition());
+
+            System.out.println("YES!");
+        }
+        if (electrical.contains(gc.getInput().getMouseX(), gc.getInput().getMouseY()) && electrical.intersects(brainbox) && in.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
+
+            g.drawString("go to the Computer!", 250, 50);
+            sbg.enterState(3, new FadeOutTransition(), new FadeInTransition());
+        }
 
     }
 
@@ -130,7 +149,7 @@ boolean allgood =false;
     private void drawfinal(Graphics g) {
         if (allgood == true) {
             System.out.println("hear ya");
-              s1 = new Circle(1480, 460, 100, 100);
+            s1 = new Circle(1480, 460, 100, 100);
             g.fill(s1);
             g.setColor(Color.red);
             g.drawString("HERE TO WIN!", 1400, 460);
